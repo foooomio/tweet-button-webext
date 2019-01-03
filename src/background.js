@@ -1,37 +1,28 @@
 'use strict'
 
-// Array Util
-const first = array =>
-  Array.isArray(array) && array.length > 0 ? array[0] : null
+const isFirefox = 'browser' in window
+const optionName = isFirefox ? 'allowScriptsToClose' : 'setSelfAsOpener'
 
-// Quotation
-const lqm = '“'
-const rqm = '”'
-const quote = text => lqm + text + rqm
+const quote = text => '“' + text + '”'
+const buildText = (title, selection) => quote(selection) + ' / ' + title
+const buildUrl = (base, params) => base + '?' + new URLSearchParams(params)
 
-// URL Builder
-const buildUrlParams = params =>
-  Object.entries(params).map(([key, value]) =>
-    key + '=' + encodeURIComponent(value)
-  ).join('&')
-
-const buildUrl = (base, params) =>
-  base + '?' + buildUrlParams(params)
-
-// Config
 const baseUrl = 'https://twitter.com/intent/tweet'
 const code = 'window.getSelection().toString()'
+const width = 550
+const height = 420
 
-const separator = ' / '
-const buildText = (title, selection) =>
-  selection ? quote(selection) + separator + title : title
-
-// Entry Point
-chrome.browserAction.onClicked.addListener(({ url, title, index }) =>
-  chrome.tabs.executeScript({ code }, results =>
-    chrome.tabs.create({
-      url: buildUrl(baseUrl, { url, text: buildText(title, first(results)) }),
-      index: index + 1
+chrome.browserAction.onClicked.addListener(({ url, title }) => {
+  chrome.tabs.executeScript({ code }, ([ selection ] = []) => {
+    const text = selection ? buildText(title, selection) : title
+    chrome.windows.create({
+      url: buildUrl(baseUrl, { url, text }),
+      left: Math.round((screen.width - width) / 2),
+      top: Math.round((screen.height - height) / 2),
+      width,
+      height,
+      type: 'popup',
+      [optionName]: true
     })
-  )
-)
+  })
+})
