@@ -1,8 +1,5 @@
 'use strict'
 
-const isFirefox = 'browser' in window
-const optionName = isFirefox ? 'allowScriptsToClose' : 'setSelfAsOpener'
-
 const quote = text => '“' + text + '”'
 const buildText = (title, selection) => quote(selection) + ' / ' + title
 const buildUrl = (base, params) => base + '?' + new URLSearchParams(params)
@@ -22,7 +19,6 @@ chrome.browserAction.onClicked.addListener(({ url, title }) => {
       width,
       height,
       type: 'popup',
-      [optionName]: true
     })
   })
 })
