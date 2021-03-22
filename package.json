@@ -1,0 +1,9 @@
+{
+  "name": "tweet-button-webext",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "prettier": "^2.2.1"
+  }
+}

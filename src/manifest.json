@@ -14,10 +14,10 @@
     }
   },
   "background": {
-    "scripts": [ "background.js" ],
+    "scripts": ["background.js"],
     "persistent": false
   },
-  "permissions": [ "activeTab" ],
+  "permissions": ["activeTab"],
   "icons": {
     "16": "icons/circle16.png",
     "24": "icons/circle24.png",
