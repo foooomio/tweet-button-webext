@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eux
+
 NAME="tweet-button-webext"
 VERSION=$(jq -r .version src/manifest.json)
 

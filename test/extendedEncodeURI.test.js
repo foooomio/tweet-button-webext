@@ -1,9 +1,7 @@
-'use strict'
+import assert from 'assert/strict';
+import twitter from 'twitter-text';
 
-const assert = require('assert').strict
-const twitter = require('twitter-text')
-
-const extendedEncodeURI = require('../src/extendedEncodeURI')
+import { extendedEncodeURI } from '../src/extendedEncodeURI.js';
 
 suite('extendedEncodeURI()', () => {
   suite('URLs that should be encoded so that Twitter-Text can recognize them', () => {
@@ -31,16 +29,16 @@ suite('extendedEncodeURI()', () => {
       'https://ypc2e55orj.github.io/playground/&',
       'https://ypc2e55orj.github.io/playground/=',
       'https://ypc2e55orj.github.io/playground/$',
-    ]
+    ];
 
     for (const url of cases) {
       test(url, () => {
-        const encoded = extendedEncodeURI(url)
-        const [extracted] = twitter.extractUrls(encoded)
-        assert.equal(extracted, encoded)
-      })
+        const encoded = extendedEncodeURI(url);
+        const [extracted] = twitter.extractUrls(encoded);
+        assert.equal(extracted, encoded);
+      });
     }
-  })
+  });
 
   suite('URLs that should not be encoded', () => {
     const cases = [
@@ -49,13 +47,13 @@ suite('extendedEncodeURI()', () => {
       'https://mastodon.social/@Gargron',
       'https://tools.ietf.org/html/rfc3986#section-2.2',
       'https://en.wikipedia.org/wiki/Google_(disambiguation)',
-    ]
+    ];
 
     for (const url of cases) {
       test(url, () => {
-        const encoded = extendedEncodeURI(url)
-        assert.equal(encoded, url)
-      })
+        const encoded = extendedEncodeURI(url);
+        assert.equal(encoded, url);
+      });
     }
-  })
-})
+  });
+});

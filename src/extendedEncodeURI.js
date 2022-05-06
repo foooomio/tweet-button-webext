@@ -1,8 +1,6 @@
-'use strict'
-
-const extendedEncodeURI = (str) => str
-
-// For testing
-if (typeof module === 'object') {
-  module.exports = extendedEncodeURI
-}
+/**
+ * @param {string} str
+ * @returns {string}
+ * FIXME: https://github.com/foooomio/tweet-button-webext/pull/1
+ */
+export const extendedEncodeURI = (str) => str;

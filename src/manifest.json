@@ -1,29 +1,29 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Tweet Button",
-  "description": "Add a tweet button to toolbar",
-  "version": "2.0.0",
-  "browser_action": {
+  "description": "Adds Tweet Button to Toolbar",
+  "version": "3.0.0",
+  "action": {
     "default_icon": {
-      "16": "icons/circle16.png",
-      "24": "icons/circle24.png",
-      "32": "icons/circle32.png",
-      "48": "icons/circle48.png",
-      "64": "icons/circle64.png",
-      "128": "icons/circle128.png"
+      "16": "icons/icon16.png",
+      "24": "icons/icon24.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "64": "icons/icon64.png",
+      "128": "icons/icon128.png"
     }
   },
   "background": {
-    "scripts": ["extendedEncodeURI.js", "background.js"],
-    "persistent": false
+    "service_worker": "background.js",
+    "type": "module"
   },
-  "permissions": ["activeTab"],
+  "permissions": ["activeTab", "scripting"],
   "icons": {
-    "16": "icons/circle16.png",
-    "24": "icons/circle24.png",
-    "32": "icons/circle32.png",
-    "48": "icons/circle48.png",
-    "64": "icons/circle64.png",
-    "128": "icons/circle128.png"
+    "16": "icons/icon16.png",
+    "24": "icons/icon24.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "64": "icons/icon64.png",
+    "128": "icons/icon128.png"
   }
 }
