@@ -7,5 +7,6 @@
   "typeAcquisition": {
     "include": ["chrome"]
   },
+  "include": ["src/**/*.js", "tests/**/*.js"],
   "exclude": ["node_modules"]
 }

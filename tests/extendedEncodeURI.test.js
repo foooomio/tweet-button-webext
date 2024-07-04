@@ -1,10 +1,11 @@
-import assert from 'assert/strict';
+import assert from 'node:assert/strict';
+import test from 'node:test';
 import twitter from 'twitter-text';
 
 import { extendedEncodeURI } from '../src/extendedEncodeURI.js';
 
-suite('extendedEncodeURI()', () => {
-  suite('URLs that should be encoded so that Twitter-Text can recognize them', () => {
+test('extendedEncodeURI()', async (t) => {
+  await t.test('URLs that should be encoded so that Twitter-Text can recognize them', async (t) => {
     const cases = [
       'https://www.scala-lang.org/api/current/scala/Int.html#==(x:Int):Boolean',
       'https://www.scala-lang.org/api/current/scala/Int.html#^(x:Int):Int',
@@ -32,7 +33,7 @@ suite('extendedEncodeURI()', () => {
     ];
 
     for (const url of cases) {
-      test(url, () => {
+      await t.test(url, () => {
         const encoded = extendedEncodeURI(url);
         const [extracted] = twitter.extractUrls(encoded);
         assert.equal(extracted, encoded);
@@ -40,7 +41,7 @@ suite('extendedEncodeURI()', () => {
     }
   });
 
-  suite('URLs that should not be encoded', () => {
+  await t.test('URLs that should not be encoded', async (t) => {
     const cases = [
       'https://example.com/index.html',
       'https://example.com/~username/',
@@ -50,7 +51,7 @@ suite('extendedEncodeURI()', () => {
     ];
 
     for (const url of cases) {
-      test(url, () => {
+      await t.test(url, () => {
         const encoded = extendedEncodeURI(url);
         assert.equal(encoded, url);
       });
